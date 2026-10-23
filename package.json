@@ -1,13 +1,13 @@
 {
   "name": "limbus-discord-bot",
   "version": "1.0.0",
-  "description": "A Limbus Company themed Discord bot",
+  "description": "Limbus Company Discord bot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "engines": {
-    "node": ">=22"
+    "node": "22.x"
   },
   "dependencies": {
     "discord.js": "^14.22.1"
