@@ -1,3 +1,4 @@
+
 const {
   Client,
   GatewayIntentBits,
@@ -11,8 +12,7 @@ const token = process.env.DISCORD_TOKEN;
 const clientId = process.env.CLIENT_ID;
 
 if (!token || !clientId) {
-  console.error("Missing DISCORD_TOKEN or CLIENT_ID environment variable.");
-  process.exit(1);
+  throw new Error("Missing DISCORD_TOKEN or CLIENT_ID.");
 }
 
 const client = new Client({
@@ -22,14 +22,14 @@ const client = new Client({
 const commands = [
   new SlashCommandBuilder()
     .setName("ping")
-    .setDescription("Check the bot's response time."),
+    .setDescription("Check the bot's connection."),
 
   new SlashCommandBuilder()
     .setName("help")
-    .setDescription("View the bot's available commands.")
+    .setDescription("View Limbus bot commands.")
 ].map(command => command.toJSON());
 
-async function registerCommands() {
+async function start() {
   const rest = new REST({ version: "10" }).setToken(token);
 
   await rest.put(
@@ -37,11 +37,11 @@ async function registerCommands() {
     { body: commands }
   );
 
-  console.log("Slash commands registered.");
+  await client.login(token);
 }
 
-client.once("clientReady", readyClient => {
-  console.log(`Logged in as ${readyClient.user.tag}`);
+client.once("clientReady", ready => {
+  console.log(`Connected as ${ready.user.tag}`);
 });
 
 client.on("interactionCreate", async interaction => {
@@ -49,7 +49,7 @@ client.on("interactionCreate", async interaction => {
 
   if (interaction.commandName === "ping") {
     return interaction.reply({
-      content: `Pong! Gateway latency: ${client.ws.ping} ms`,
+      content: `Pong! ${client.ws.ping} ms`,
       ephemeral: true
     });
   }
@@ -58,20 +58,12 @@ client.on("interactionCreate", async interaction => {
     const embed = new EmbedBuilder()
       .setColor(0x8B5CF6)
       .setTitle("Limbus Company | Command Guide")
-      .setDescription("Welcome, Manager. Your journey begins here.")
-      .addFields(
-        {
-          name: "Utility",
-          value: "`/ping` — Check bot latency."
-        },
-        {
-          name: "Information",
-          value: "`/help` — View this command guide."
-        }
-      )
-      .setFooter({
-        text: "Limbus Company • Initial Release"
-      });
+      .setDescription("Welcome, Manager.")
+      .addFields({
+        name: "Utility",
+        value: "`/ping` — Check connection\n`/help` — Show this guide"
+      })
+      .setFooter({ text: "Limbus Company • Initial Release" });
 
     return interaction.reply({
       embeds: [embed],
@@ -80,14 +72,7 @@ client.on("interactionCreate", async interaction => {
   }
 });
 
-async function main() {
-  try {
-    await registerCommands();
-    await client.login(token);
-  } catch (error) {
-    console.error("Bot startup failed:", error);
-    process.exit(1);
-  }
-}
-
-main();
+start().catch(error => {
+  console.error("Startup failed:", error);
+  process.exit(1);
+});
