@@ -41,7 +41,8 @@ function sessionFor(req) {
   const raw = cookieValue(req, "limbus_session");
   if (!SESSION_SECRET || !raw || !raw.includes(".")) return null;
   const [id, signature] = raw.split(".");
-  const expected = id ? sign(id) : "";\n  if (!id || !signature || signature.length !== expected.length || !crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) return null;
+  const expected = id ? sign(id) : "";
+  if (!id || !signature || signature.length !== expected.length || !crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) return null;
   const session = sessions.get(id);
   if (!session || session.expiresAt < Date.now()) {
     sessions.delete(id);
