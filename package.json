@@ -1,19 +1,14 @@
 {
   "name": "limbus-discord-bot",
-  "version": "1.1.0",
-  "description": "Limbus Company Discord bot and web dashboard",
+  "version": "1.2.0",
+  "description": "Limbus Company Discord bot and secure dashboard API",
   "main": "start.js",
   "scripts": {
     "start": "node start.js",
     "start:bot": "node index.js",
     "start:dashboard": "node dashboard.js",
-    "check": "node --check index.js && node --check dashboard.js && node --check start.js && node --check public/app.js"
+    "check": "node --check index.js && node --check dashboard.js && node --check start.js && node --check public/app.js && node --check lib/auth.js && node --check api/auth/discord.js && node --check api/auth/callback.js && node --check api/health.js && node --check api/me.js && node --check api/servers.js && node --check api/commands.js && node --check api/logout.js"
   },
-  "engines": {
-    "node": "22.x"
-  },
-  "dependencies": {
-    "discord.js": "^14.22.1",
-    "express": "^5.1.0"
-  }
+  "engines": { "node": "22.x" },
+  "dependencies": { "discord.js": "^14.22.1", "express": "^5.1.0" }
 }
