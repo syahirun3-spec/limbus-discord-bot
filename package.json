@@ -1,15 +1,19 @@
 {
   "name": "limbus-discord-bot",
-  "version": "1.0.0",
-  "description": "Limbus Company Discord bot",
-  "main": "index.js",
+  "version": "1.1.0",
+  "description": "Limbus Company Discord bot and web dashboard",
+  "main": "start.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node start.js",
+    "start:bot": "node index.js",
+    "start:dashboard": "node dashboard.js",
+    "check": "node --check index.js && node --check dashboard.js && node --check start.js && node --check public/app.js"
   },
   "engines": {
     "node": "22.x"
   },
   "dependencies": {
-    "discord.js": "^14.22.1"
+    "discord.js": "^14.22.1",
+    "express": "^5.1.0"
   }
 }
