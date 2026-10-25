@@ -39,9 +39,9 @@ function clearCookie(res, name) {
 }
 function sessionFor(req) {
   const raw = cookieValue(req, "limbus_session");
-  if (!raw || !raw.includes(".")) return null;
+  if (!SESSION_SECRET || !raw || !raw.includes(".")) return null;
   const [id, signature] = raw.split(".");
-  if (!id || !signature || !crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(sign(id)))) return null;
+  const expected = id ? sign(id) : "";\n  if (!id || !signature || signature.length !== expected.length || !crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) return null;
   const session = sessions.get(id);
   if (!session || session.expiresAt < Date.now()) {
     sessions.delete(id);
@@ -128,14 +128,12 @@ app.get("/auth/callback", async (req, res) => {
     const id = crypto.randomBytes(32).toString("hex");
     sessions.set(id, {
       user: { id: user.id, username: user.username, global_name: user.global_name || user.username, avatar: user.avatar },
-      guilds: guilds.filter(g => canManageGuild({ user, guilds, }, g.id) || ADMIN_IDS.has(user.id)),
+      guilds: guilds.filter(g => {
+        const p = BigInt(g.permissions || "0");
+        return ADMIN_IDS.has(user.id) || g.owner || (p & ((1n << 5n) | (1n << 3n))) !== 0n;
+      }),
       expiresAt: Date.now() + Math.min(Number(token.expires_in || 604800), 604800) * 1000
     });
-    const session = sessions.get(id);
-    session.guilds = guilds.filter(g => {
-      const p = BigInt(g.permissions || "0");
-      return ADMIN_IDS.has(user.id) || g.owner || (p & ((1n << 5n) | (1n << 3n))) !== 0n;
-    }).map(safeGuild);
     setCookie(res, "limbus_session", id + "." + sign(id), { maxAge: 604800 });
     res.redirect("/");
   } catch (error) {
@@ -145,7 +143,7 @@ app.get("/auth/callback", async (req, res) => {
 });
 
 app.get("/api/me", requireSession, (req, res) => {
-  res.json({ user: req.session.user, guilds: req.session.guilds });
+  res.json({ user: req.session.user, guilds: req.session.guilds.map(safeGuild) });
 });
 
 app.get("/api/health", async (req, res) => {
