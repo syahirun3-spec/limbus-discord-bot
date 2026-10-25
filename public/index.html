@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101012">
+  <title>Limbus Division — Dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body data-page="overview">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/"><span class="brand-mark">L</span><span><strong>LIMBUS</strong><small>ADMINISTRATION</small></span></a>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="nav">
+        <a class="nav-link active" href="/"><span>◈</span> Overview</a>
+        <a class="nav-link" href="/economy"><span>◇</span> Lunacy Economy</a>
+        <a class="nav-link" href="/moderation"><span>▤</span> Moderation</a>
+        <a class="nav-link" href="/settings"><span>⚙</span> Settings</a>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span><span>DIVISION SYSTEM</span><small id="sidebar-status">Checking…</small></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div><div class="eyebrow">LIMBUS COMPANY / CONTROL</div><h1>Command Center</h1></div><div class="top-actions"><span id="live-status" class="pill muted">Checking status</span><button id="login-button" class="button primary">Connect Discord</button><div id="user-chip" class="user-chip hidden"></div></div></header>
+      <section id="login-notice" class="panel login-panel"><div class="panel-symbol">◈</div><div><h2>Access the control room</h2><p>Sign in with Discord to view servers where you have management permissions. No bot token is requested from you.</p></div><a class="button primary" href="/auth/discord">Sign in with Discord ↗</a></section>
+      <section id="dashboard-content" class="hidden">
+        <div class="section-head"><div><div class="eyebrow">OPERATIONAL SUMMARY</div><h2>System overview</h2></div><label class="server-picker">Server<select id="guild-select" aria-label="Select server"><option value="">Select a server</option></select></label></div>
+        <div class="stats-grid">
+          <article class="stat-card"><span class="stat-label">ACCOUNT RECORDS</span><strong id="stat-accounts">—</strong><small>Accounts in this server's economy</small></article>
+          <article class="stat-card"><span class="stat-label">CASH IN CIRCULATION</span><strong id="stat-cash">—</strong><small>Available member balances</small></article>
+          <article class="stat-card"><span class="stat-label">BANKED LUNACY</span><strong id="stat-bank">—</strong><small>Deposited savings</small></article>
+          <article class="stat-card accent"><span class="stat-label">TOTAL NET WORTH</span><strong id="stat-net">—</strong><small>Cash plus banked savings</small></article>
+        </div>
+        <div class="content-grid">
+          <section class="panel"><div class="panel-heading"><div><div class="eyebrow">SERVER ECONOMY</div><h2>Rich list</h2></div><a class="text-link" href="/economy">Open economy ↗</a></div><div id="leaderboard" class="leaderboard"><div class="empty-state">Sign in and select a server to load its data.</div></div></section>
+          <section class="panel system-panel"><div class="eyebrow">SERVICE HEALTH</div><h2>Live diagnostics</h2><div class="health-row"><span>Dashboard web service</span><strong id="web-health">Checking</strong></div><div class="health-row"><span>Discord API token</span><strong id="discord-health">Checking</strong></div><div class="health-row"><span>Last check</span><strong id="checked-at">—</strong></div><p class="fine-print">Discord API reachability does not prove the bot's Gateway session is connected. The bot process must also be running on a persistent host.</p></section>
+        </div>
+      </section>
+      <footer> LIMBUS COMPANY <span>•</span> Internal administration interface <span class="footer-right">NODE / DISCORD.JS</span></footer>
+    </main>
+  </div>
+</body>
+</html>
