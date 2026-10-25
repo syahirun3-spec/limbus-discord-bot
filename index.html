@@ -1,44 +1,131 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101012">
-<title>Limbus Division — Dashboard</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101012">
+<title>Limbus Division — Command Center</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
-:root{color-scheme:dark;--bg:#101012;--panel:#18181b;--panel2:#202023;--line:#303035;--text:#f1eee9;--muted:#99969a;--red:#b43b36;--gold:#c7a86b;--green:#72c69b}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 80% -10%,#451e203b,transparent 45%),var(--bg);color:var(--text);font:14px Manrope,system-ui,sans-serif}a{color:inherit;text-decoration:none}.shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh;position:relative;isolation:isolate}.sidebar{padding:25px 16px;background:#111113;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:25px}.brand{display:flex;align-items:center;gap:13px;padding:0 8px}.brandmark{width:38px;height:38px;border:1px solid var(--gold);border-radius:12px;display:grid;place-items:center;color:var(--gold);font-size:20px;transform:rotate(45deg);background:#c7a86b0b}.brandmark span{transform:rotate(-45deg)}.brand b,.brand small{display:block;letter-spacing:2px}.brand b{font-size:13px}.brand small{font:10px 'DM Mono',monospace;color:var(--muted);margin-top:4px}.label,.eyebrow,.statlabel{font:10px 'DM Mono',monospace;letter-spacing:1.6px;color:var(--muted)}.label{padding:0 12px 9px}.nav{display:grid;gap:6px}.nav a{padding:12px;border:1px solid transparent;border-radius:9px;color:#aaa8a8;transition:.2s}.nav a span{display:inline-block;width:24px;color:var(--gold)}.nav a.active{background:linear-gradient(100deg,#342020,#21191a);border-color:#543031;color:white}.nav a:hover{background:#1d1b1d;transform:translateX(2px)}.sidebottom{margin-top:auto;border-top:1px solid var(--line);padding:18px 9px 0;font:10px 'DM Mono',monospace;letter-spacing:1px}.sidebottom small{display:block;color:var(--muted);margin:8px 0 0 16px;letter-spacing:0}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-right:8px;box-shadow:0 0 12px #c7a86b55}.main{padding:30px clamp(18px,4vw,55px) 20px;max-width:1600px;width:100%;margin:auto;min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:28px}.topbar h1{font-size:clamp(25px,3vw,35px);letter-spacing:-1.3px;margin:8px 0 0}.tag{border:1px solid #5a4a2e;color:var(--gold);background:#241f17;padding:8px 11px;border-radius:99px;font:10px 'DM Mono',monospace;white-space:nowrap}.banner{display:flex;align-items:center;gap:17px;padding:22px;margin-bottom:27px;border:1px solid #4c3232;border-radius:15px;background:linear-gradient(110deg,#2b1b1d,#191719 72%);position:relative;overflow:hidden}.symbol{width:47px;height:47px;display:grid;place-items:center;border:1px solid #664343;background:#2a1c1d;color:var(--gold);border-radius:13px;font-size:22px;flex-shrink:0}.banner h2{font-size:17px;margin:0 0 7px}.banner p{color:var(--muted);margin:0;line-height:1.6;font-size:12px}.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:28px 0 17px}.sectionhead h2{font-size:22px;margin:7px 0 0;letter-spacing:-.5px}.demo{font:10px 'DM Mono',monospace;color:#e0bd82;border:1px solid #58472b;border-radius:6px;padding:6px 8px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.card,.panel{background:linear-gradient(145deg,#1b1b1e,#151517);border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0;transition:transform .2s,border-color .2s,box-shadow .2s}.card:hover,.panel:hover{transform:translateY(-3px);border-color:#55403b;box-shadow:0 12px 28px #0002}.card strong{display:block;font-size:clamp(23px,2.5vw,31px);letter-spacing:-1px;margin:15px 0 8px}.card small{color:var(--muted);font-size:11px;line-height:1.5}.card.accent{border-color:#6a4e2d;background:linear-gradient(145deg,#30251b,#1b1917)}.card.accent .statlabel{color:var(--gold)}.grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(250px,.8fr);gap:15px;margin-top:16px}.panelhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.panel h3{font-size:16px;margin:7px 0 0}.rows{display:grid}.member{display:grid;grid-template-columns:35px minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 0;border-top:1px solid #2a2a2d}.rank{font:12px 'DM Mono',monospace;color:var(--gold)}.membername{font-size:12px;font-weight:700}.membername small{display:block;color:var(--muted);font:10px 'DM Mono',monospace;margin-top:5px}.amount{text-align:right;font-size:12px;font-weight:800}.amount small{display:block;color:var(--muted);font-size:10px;font-weight:400;margin-top:4px}.health{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:14px 0;font-size:12px}.health span{color:var(--muted)}.health b{font:10px 'DM Mono',monospace;color:var(--gold);text-align:right}.note{font-size:11px;line-height:1.7;color:var(--muted);margin:12px 0 0}.footer{padding:28px 2px 8px;color:#777476;font:9px 'DM Mono',monospace;letter-spacing:1.1px}.footer span{color:var(--gold);padding:0 7px}.ambient{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1}.tri{position:absolute;width:150px;aspect-ratio:1;clip-path:polygon(50% 4%,97% 91%,3% 91%);background:linear-gradient(145deg,#c7a86b0c,#b43b3610);animation:drift 18s ease-in-out infinite}.tri.one{right:7%;top:13%;transform:rotate(17deg)}.tri.two{left:29%;bottom:-5%;width:100px;animation-delay:-8s}.eyes{position:absolute;right:8%;top:18%;display:flex;gap:13px;opacity:.28;transform:rotate(-8deg);animation:float 9s ease-in-out infinite}.eyes i{width:27px;height:27px;border:1px solid var(--gold);border-radius:50%;display:block;background:radial-gradient(circle,#c7a86b 0 3px,transparent 4px);animation:blink 7s infinite}.eyes i:nth-child(2){animation-delay:.08s}@keyframes drift{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -13px;rotate:4deg}}@keyframes float{0%,100%{translate:0 0}50%{translate:-5px 9px}}@keyframes blink{0%,45%,49%,100%{scale:1 1}47%{scale:1 .12}}@media(max-width:1050px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr}}@media(max-width:700px){.shell{display:block}.sidebar{padding:15px;border-right:0;border-bottom:1px solid var(--line);gap:15px}.brand{padding:0 5px}.nav{display:flex;overflow-x:auto}.nav a{white-space:nowrap;font-size:11px;padding:10px}.label,.sidebottom{display:none}.main{padding:20px 14px}.topbar{align-items:flex-start;flex-direction:column;padding-bottom:18px;margin-bottom:20px}.banner{align-items:flex-start;padding:17px}.stats{gap:9px}.card,.panel{padding:15px}.card strong{font-size:22px}.sectionhead{align-items:flex-start;flex-direction:column}.eyes{right:6%;top:23%;scale:.8}.tri.one{right:-45px;top:20%}.footer{line-height:2}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+:root{color-scheme:dark;--bg:#101012;--panel:#18181b;--line:#303035;--text:#f1eee9;--muted:#99969a;--gold:#c7a86b;--green:#72c69b;--red:#b43b36}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 80% -10%,#451e203b,transparent 45%),var(--bg);color:var(--text);font:14px Manrope,system-ui,sans-serif}button{font:inherit;cursor:pointer}.shell{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:100vh}.sidebar{padding:24px 15px;background:#111113;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:25px}.brand{display:flex;align-items:center;gap:12px;padding:0 8px}.mark{width:38px;height:38px;border:1px solid var(--gold);border-radius:12px;display:grid;place-items:center;color:var(--gold);font-size:20px;transform:rotate(45deg)}.mark span{transform:rotate(-45deg)}.brand b,.brand small{display:block;letter-spacing:2px}.brand b{font-size:13px}.brand small{font:10px 'DM Mono',monospace;color:var(--muted);margin-top:4px}.label,.eyebrow,.statlabel{font:10px 'DM Mono',monospace;letter-spacing:1.5px;color:var(--muted)}.label{padding:0 12px 9px}.nav{display:grid;gap:6px}.nav button{width:100%;text-align:left;padding:12px;border:1px solid transparent;border-radius:9px;color:#aaa8a8;background:transparent}.nav button span{display:inline-block;width:24px;color:var(--gold)}.nav button.active{background:linear-gradient(100deg,#342020,#21191a);border-color:#543031;color:white}.nav button:hover{background:#1d1b1d}.sidebottom{margin-top:auto;border-top:1px solid var(--line);padding:18px 9px 0;font:10px 'DM Mono',monospace;letter-spacing:1px}.sidebottom small{display:block;color:var(--muted);margin:8px 0 0 16px;letter-spacing:0}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-right:8px}.dot.good{background:var(--green)}.dot.bad{background:#e37d76}.main{padding:30px clamp(16px,4vw,52px) 20px;max-width:1600px;width:100%;margin:auto;min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:26px}.topbar h1{font-size:clamp(25px,3vw,35px);letter-spacing:-1.3px;margin:8px 0 0}.tag,.pill{border:1px solid #5a4a2e;color:var(--gold);background:#241f17;padding:7px 10px;border-radius:99px;font:10px 'DM Mono',monospace;white-space:nowrap}.button{border:1px solid #654b30;border-radius:9px;background:#2a2118;color:#e8d1a6;padding:10px 14px;font-weight:700;font-size:12px}.button.primary{background:linear-gradient(110deg,#8f302f,#592426);border-color:#9a4b46;color:white}.button.ghost{background:#171719;border-color:var(--line);color:var(--text)}.banner{display:flex;align-items:center;gap:17px;padding:21px;margin-bottom:26px;border:1px solid #4c3232;border-radius:15px;background:linear-gradient(110deg,#2b1b1d,#191719 72%)}.symbol{width:47px;height:47px;display:grid;place-items:center;border:1px solid #664343;background:#2a1c1d;color:var(--gold);border-radius:13px;font-size:22px;flex-shrink:0}.banner h2{font-size:17px;margin:0 0 7px}.banner p{color:var(--muted);margin:0;line-height:1.6;font-size:12px}.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:28px 0 17px}.sectionhead h2{font-size:22px;margin:7px 0 0}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.card,.panel{background:linear-gradient(145deg,#1b1b1e,#151517);border:1px solid var(--line);border-radius:14px;padding:19px;min-width:0}.card strong{display:block;font-size:clamp(22px,2.5vw,30px);letter-spacing:-1px;margin:15px 0 8px;overflow-wrap:anywhere}.card small{color:var(--muted);font-size:11px;line-height:1.5}.card.accent{border-color:#6a4e2d;background:linear-gradient(145deg,#30251b,#1b1917)}.card.accent .statlabel{color:var(--gold)}.grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr);gap:15px;margin-top:16px}.panelhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.panel h3{font-size:16px;margin:7px 0 0}.rows{display:grid}.item{display:grid;grid-template-columns:35px minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 0;border-top:1px solid #2a2a2d}.ico{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;background:#262022;border:1px solid #3b2b2b;color:var(--gold)}.itemname{font-size:12px;font-weight:700;overflow-wrap:anywhere}.itemname small{display:block;color:var(--muted);font:10px 'DM Mono',monospace;margin-top:5px;overflow-wrap:anywhere}.right{text-align:right;font-size:10px;color:var(--muted);overflow-wrap:anywhere}.health{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:14px 0;font-size:12px}.health span{color:var(--muted)}.health b{font:10px 'DM Mono',monospace;color:var(--gold);text-align:right}.note{font-size:11px;line-height:1.7;color:var(--muted);margin:12px 0 0}.notice{padding:12px 14px;border-radius:9px;background:#211d18;border:1px solid #4d3e29;color:#d4bd91;font-size:12px;line-height:1.6;margin:14px 0}.error{background:#291a1b;border-color:#613031;color:#f0a29d}.empty{padding:24px 12px;text-align:center;color:var(--muted);font-size:12px;line-height:1.7}.userbox{display:flex;align-items:center;gap:9px}.avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid #4b3932}.usertext{font-size:11px}.usertext b,.usertext small{display:block}.usertext small{color:var(--muted);font-size:10px}.footer{padding:28px 2px 8px;color:#777476;font:9px 'DM Mono',monospace;letter-spacing:1.1px}.footer span{color:var(--gold);padding:0 7px}[hidden]{display:none!important}@media(max-width:1000px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr}}@media(max-width:700px){.shell{display:block}.sidebar{padding:14px;border-right:0;border-bottom:1px solid var(--line);gap:15px}.brand{padding:0 5px}.nav{display:flex;overflow-x:auto}.nav button{white-space:nowrap;font-size:11px;padding:10px}.label,.sidebottom{display:none}.main{padding:20px 14px}.topbar{align-items:flex-start;flex-direction:column;padding-bottom:18px;margin-bottom:20px}.banner{align-items:flex-start;padding:16px}.stats{gap:9px}.card,.panel{padding:15px}.sectionhead{align-items:flex-start;flex-direction:column}.userbox{flex-wrap:wrap}}@media(max-width:420px){.stats{grid-template-columns:1fr}.item{grid-template-columns:32px minmax(0,1fr)}.right{grid-column:2;text-align:left}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body>
-<div class="ambient" aria-hidden="true"><span class="tri one"></span><span class="tri two"></span><span class="eyes"><i></i><i></i></span></div>
-<div class="shell">
-<aside class="sidebar">
-<a class="brand" href="./"><span class="brandmark"><span>◈</span></span><span><b>LIMBUS</b><small>ADMINISTRATION</small></span></a>
-<div><div class="label">WORKSPACE</div><nav class="nav"><a class="active" href="#overview"><span>◈</span> Overview</a><a href="#economy"><span>◇</span> Lunacy Economy</a><a href="#moderation"><span>▤</span> Moderation</a><a href="#settings"><span>⚙</span> Settings</a></nav></div>
-<div class="sidebottom"><span class="dot"></span>STATIC SITE PREVIEW<small>GitHub Pages</small></div>
-</aside>
-<main class="main" id="overview">
-<header class="topbar"><div><div class="eyebrow">LIMBUS COMPANY / CONTROL</div><h1>Command Center</h1></div><span class="tag">◉ PREVIEW MODE</span></header>
-<section class="banner"><div class="symbol">◈</div><div><h2>Welcome to the control room.</h2><p>This is the dashboard interface preview. The figures below are sample values, not live Discord data. Discord sign-in and live management require a hosted backend.</p></div></section>
-<div class="sectionhead"><div><div class="eyebrow">OPERATIONAL SUMMARY</div><h2>System overview</h2></div><span class="demo">DEMO DATA</span></div>
-<section class="stats">
-<article class="card"><span class="statlabel">ACCOUNT RECORDS</span><strong>128</strong><small>Sample economy accounts</small></article>
-<article class="card"><span class="statlabel">CASH IN CIRCULATION</span><strong>84,250</strong><small>Available member balances</small></article>
-<article class="card"><span class="statlabel">BANKED LUNACY</span><strong>216,900</strong><small>Deposited savings</small></article>
-<article class="card accent"><span class="statlabel">TOTAL NET WORTH</span><strong>301,150</strong><small>Cash plus banked savings</small></article>
-</section>
-<section class="grid">
-<article class="panel" id="economy"><div class="panelhead"><div><div class="eyebrow">SERVER ECONOMY</div><h3>Rich list</h3></div><span class="demo">SAMPLE</span></div><div class="rows">
-<div class="member"><span class="rank">01</span><span class="membername">Middle Manager<small>Cash 18,500 · Bank 42,000</small></span><span class="amount">60,500<small>Lunacy</small></span></div>
-<div class="member"><span class="rank">02</span><span class="membername">The Fixer<small>Cash 12,250 · Bank 31,000</small></span><span class="amount">43,250<small>Lunacy</small></span></div>
-<div class="member"><span class="rank">03</span><span class="membername">Unknown Sinner<small>Cash 9,400 · Bank 22,500</small></span><span class="amount">31,900<small>Lunacy</small></span></div>
-<div class="member"><span class="rank">04</span><span class="membername">Office Clerk<small>Cash 7,100 · Bank 16,800</small></span><span class="amount">23,900<small>Lunacy</small></span></div>
-</div></article>
-<article class="panel" id="moderation"><div class="eyebrow">SERVICE HEALTH</div><h3>System diagnostics</h3><div class="health"><span>Static website</span><b>AVAILABLE</b></div><div class="health"><span>Discord OAuth</span><b>BACKEND NEEDED</b></div><div class="health"><span>Live economy data</span><b>BACKEND NEEDED</b></div><p class="note">GitHub Pages can publish this interface, but it cannot execute the Node.js server needed for authentication, permissions, and live bot data. This preview does not perform moderation actions.</p></article>
-</section>
-<section class="panel" id="settings" style="margin-top:16px"><div class="eyebrow">CONFIGURATION</div><h3>Dashboard settings</h3><p class="note">The interface is live as a static preview. To connect real Discord servers and bot data, deploy the Node.js backend separately and point the frontend to it.</p></section>
-<footer class="footer">LIMBUS COMPANY <span>•</span> INTERNAL ADMINISTRATION INTERFACE <span>•</span> STATIC PREVIEW</footer>
+<body><div class="shell">
+<aside class="sidebar"><a class="brand" href="./"><span class="mark"><span>◈</span></span><span><b>LIMBUS</b><small>ADMINISTRATION</small></span></a>
+<div><div class="label">WORKSPACE</div><nav class="nav" aria-label="Dashboard sections"><button class="active" data-view="overview"><span>◈</span> Overview</button><button data-view="servers"><span>▦</span> Servers</button><button data-view="commands"><span>◇</span> Commands</button></nav></div>
+<div class="sidebottom"><span class="dot" id="sidebarDot"></span><span id="sidebarStatus">WAITING FOR BACKEND</span><small>GitHub Pages frontend</small></div></aside>
+<main class="main"><header class="topbar"><div><div class="eyebrow">LIMBUS COMPANY / CONTROL</div><h1 id="pageTitle">Command Center</h1></div><div class="userbox" id="userBox" hidden><img class="avatar" id="userAvatar" alt=""><div class="usertext"><b id="userName">Signed in</b><small>Discord account</small></div><button class="button ghost" id="logoutButton">Sign out</button></div><button class="button primary" id="loginButton">Sign in with Discord ↗</button></header>
+<section class="banner"><div class="symbol">◈</div><div><h2 id="welcomeTitle">A clearer view of your Discord bot.</h2><p id="welcomeText">Sign in with Discord to see servers you manage, check the backend connection, and view the bot's command list.</p></div></section>
+<div id="setupNotice" class="notice">Backend not configured. After deploying the API, replace YOUR-VERCEL-PROJECT in the API_BASE setting near the bottom of this file with your real Vercel URL.</div><div id="errorNotice" class="notice error" hidden></div>
+<section id="view-overview"><div class="sectionhead"><div><div class="eyebrow">OPERATIONAL SUMMARY</div><h2>System overview</h2></div><span class="pill" id="refreshLabel">NOT CONNECTED</span></div>
+<section class="stats"><article class="card"><span class="statlabel">DASHBOARD BACKEND</span><strong id="backendStatus">Unknown</strong><small id="backendDetail">Waiting for API response</small></article><article class="card"><span class="statlabel">DISCORD API</span><strong id="discordStatus">Unknown</strong><small id="discordDetail">Bot token stays on backend</small></article><article class="card accent"><span class="statlabel">MANAGED SERVERS</span><strong id="serverCount">—</strong><small>Servers the bot can access and your account can manage</small></article></section>
+<section class="grid"><article class="panel"><div class="panelhead"><div><div class="eyebrow">YOUR WORKSPACE</div><h3>Available servers</h3></div><button class="button ghost" id="reloadServers">Refresh</button></div><div class="rows" id="overviewServers"><div class="empty">Sign in and connect the backend to load your servers.</div></div></article><article class="panel"><div class="eyebrow">COMMAND CATALOG</div><h3>Registered bot commands</h3><div class="health"><span>Available commands</span><b id="commandCount">—</b></div><div class="health"><span>Execution</span><b>IN DISCORD</b></div><p class="note">View the current bot command list. Commands run in Discord; this page does not change slash-command definitions.</p><button class="button ghost" id="openCommands" style="margin-top:12px">View command catalog →</button></article></section></section>
+<section id="view-servers" hidden><div class="sectionhead"><div><div class="eyebrow">GUILD ACCESS</div><h2>Servers</h2></div><button class="button ghost" id="reloadServers2">Refresh servers</button></div><div class="panel"><div class="panelhead"><div><div class="eyebrow">AVAILABLE WORKSPACES</div><h3>Servers you can manage</h3></div><span class="pill" id="serverPill">PRIVATE TO YOUR SESSION</span></div><div id="serverList" class="rows"><div class="empty">Sign in with Discord to load servers.</div></div><p class="note">Only servers where your account has Manage Server or Administrator access and the bot is installed are shown.</p></div></section>
+<section id="view-commands" hidden><div class="sectionhead"><div><div class="eyebrow">BOT REFERENCE</div><h2>Command catalog</h2></div><span class="pill">READ ONLY</span></div><div class="panel"><div class="panelhead"><div><div class="eyebrow">LUNACY ECONOMY</div><h3>Slash commands</h3></div><span class="pill" id="commandPill">Waiting for sign-in</span></div><div id="commandList" class="rows"><div class="empty">Sign in with Discord to load the command catalog.</div></div><p class="note">This catalog mirrors the commands currently defined in the bot source. It does not run moderation actions or dynamically register commands.</p></div></section>
+<footer class="footer">LIMBUS COMPANY <span>•</span> INTERNAL ADMINISTRATION INTERFACE <span>•</span> DISCORD OAUTH2</footer>
 </main></div>
-</body></html>
+<script>
+"use strict";
+// Replace this placeholder with your deployed Vercel backend HTTPS URL.
+const API_BASE = "https://YOUR-VERCEL-PROJECT.vercel.app";
+const configured = !API_BASE.includes("YOUR-VERCEL-PROJECT");
+const tokenKey = "limbus_dashboard_session";
+let sessionToken = sessionStorage.getItem(tokenKey) || "";
+const $ = id => document.getElementById(id);
+function setText(id, value) { $(id).textContent = value; }
+function showError(message) { $("errorNotice").textContent = message; $("errorNotice").hidden = !message; }
+function apiUrl(path) { return API_BASE.replace(/\/$/, "") + path; }
+async function api(path, options = {}) {
+  const headers = { ...(options.headers || {}) };
+  if (sessionToken) headers.Authorization = "Bearer " + sessionToken;
+  const response = await fetch(apiUrl(path), { ...options, headers, mode: "cors", cache: "no-store" });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.error || "Request failed (" + response.status + ").");
+  return data;
+}
+function avatarUrl(user) {
+  if (!user || !user.avatar) return "https://cdn.discordapp.com/embed/avatars/0.png";
+  const ext = user.avatar.startsWith("a_") ? "gif" : "png";
+  return "https://cdn.discordapp.com/avatars/" + encodeURIComponent(user.id) + "/" + encodeURIComponent(user.avatar) + "." + ext + "?size=96";
+}
+function setView(view) {
+  ["overview","servers","commands"].forEach(name => {
+    $("view-" + name).hidden = name !== view;
+    document.querySelector('[data-view="' + name + '"]').classList.toggle("active", name === view);
+  });
+  setText("pageTitle", ({overview:"Command Center",servers:"Server Directory",commands:"Command Catalog"})[view]);
+}
+function makeRow(icon, name, sub, right) {
+  const item = document.createElement("div"); item.className = "item";
+  const ico = document.createElement("span"); ico.className = "ico"; ico.textContent = icon;
+  const info = document.createElement("span"); info.className = "itemname"; info.textContent = name;
+  const small = document.createElement("small"); small.textContent = sub; info.appendChild(small);
+  const end = document.createElement("span"); end.className = "right"; end.textContent = right || "";
+  item.append(ico, info, end); return item;
+}
+function renderServers(servers) {
+  [$("overviewServers"),$("serverList")].forEach(container => {
+    container.replaceChildren();
+    if (!servers.length) {
+      const empty = document.createElement("div"); empty.className = "empty";
+      empty.textContent = "No servers found where you have management permission and the bot is installed.";
+      container.appendChild(empty); return;
+    }
+    servers.forEach(server => {
+      const item = makeRow("▦",server.name,"Server ID · "+server.id,server.owner?"OWNER":"AVAILABLE");
+      if (server.icon) {
+        const img=document.createElement("img");img.className="avatar";img.alt="";
+        img.src="https://cdn.discordapp.com/icons/"+encodeURIComponent(server.id)+"/"+encodeURIComponent(server.icon)+".png?size=96";
+        item.replaceChild(img,item.firstChild);
+      }
+      container.appendChild(item);
+    });
+  });
+  setText("serverCount",String(servers.length));setText("serverPill",servers.length+" AVAILABLE");
+}
+function renderCommands(commands) {
+  const container=$("commandList");container.replaceChildren();
+  commands.forEach(command=>container.appendChild(makeRow("/","/"+command.name,command.description+" · "+command.category,command.usage)));
+  setText("commandCount",String(commands.length));setText("commandPill",commands.length+" COMMANDS");
+}
+async function loadHealth() {
+  if(!configured){setText("backendStatus","Not set");setText("backendDetail","Set API_BASE after deployment");setText("discordStatus","Unknown");setText("discordDetail","Backend URL is a placeholder");setText("sidebarStatus","BACKEND NOT CONFIGURED");$("sidebarDot").className="dot bad";return;}
+  try{
+    const h=await api("/api/health");
+    setText("backendStatus",h.backend==="online"?"Online":"Unavailable");
+    setText("backendDetail","Checked "+new Date(h.checkedAt).toLocaleTimeString());
+    setText("discordStatus",h.discordApi==="connected"?"Reachable":h.discordApi==="not-configured"?"Not set":"Unavailable");
+    setText("discordDetail",h.botName?"Bot API account: "+h.botName:"Discord REST API reachability only");
+    setText("sidebarStatus","BACKEND "+(h.backend==="online"?"ONLINE":"UNAVAILABLE").toUpperCase());
+    $("sidebarDot").className="dot "+(h.backend==="online"?"good":"bad");
+    setText("refreshLabel","CHECKED "+new Date(h.checkedAt).toLocaleTimeString());$("setupNotice").hidden=true;
+  }catch(e){setText("backendStatus","Unavailable");setText("backendDetail",e.message);setText("sidebarStatus","BACKEND UNAVAILABLE");$("sidebarDot").className="dot bad";}
+}
+async function loadPrivateData() {
+  if(!sessionToken||!configured)return;
+  try{
+    const me=await api("/api/me");$("userBox").hidden=false;$("loginButton").hidden=true;
+    setText("userName",me.user.global_name||me.user.username);$("userAvatar").src=avatarUrl(me.user);
+    setText("welcomeTitle","Welcome back, "+(me.user.global_name||me.user.username)+".");
+    setText("welcomeText","Your Discord session is active. Server access is checked by the backend.");
+    const results=await Promise.all([api("/api/servers"),api("/api/commands")]);
+    renderServers(results[0].servers||[]);renderCommands(results[1].commands||[]);
+  }catch(e){sessionStorage.removeItem(tokenKey);sessionToken="";$("userBox").hidden=true;$("loginButton").hidden=false;showError(e.message+" Sign in with Discord again if needed.");}
+}
+function signOut(){
+  sessionStorage.removeItem(tokenKey);sessionToken="";$("userBox").hidden=true;$("loginButton").hidden=false;
+  setText("welcomeTitle","A clearer view of your Discord bot.");
+  setText("welcomeText","Sign in with Discord to see servers you manage, check the backend connection, and view the bot's command list.");
+  renderServers([]);renderCommands([]);showError("");
+  $("overviewServers").innerHTML='<div class="empty">Sign in and connect the backend to load your servers.</div>';
+}
+function login(){if(!configured){showError("The API URL is not configured yet. Deploy the backend and replace API_BASE in index.html.");return;}location.href=apiUrl("/api/auth/discord");}
+document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view)));
+$("loginButton").addEventListener("click",login);$("logoutButton").addEventListener("click",signOut);$("openCommands").addEventListener("click",()=>setView("commands"));
+async function refreshServers(){try{const d=await api("/api/servers");renderServers(d.servers||[]);showError("");}catch(e){showError(e.message);}}
+$("reloadServers").addEventListener("click",refreshServers);$("reloadServers2").addEventListener("click",refreshServers);
+(function init(){
+  const hash=new URLSearchParams(location.hash.slice(1));const incoming=hash.get("session");
+  if(incoming){sessionToken=incoming;sessionStorage.setItem(tokenKey,incoming);history.replaceState(null,"",location.pathname+location.search);}
+  $("setupNotice").hidden=configured;loadHealth();loadPrivateData();
+})();
+</script></body></html>
